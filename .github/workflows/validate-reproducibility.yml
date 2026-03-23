@@ -1,0 +1,48 @@
+name: Validate Reproducibility
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - 'scripts/download_*.py'
+      - 'scripts/setup.sh'
+      - 'requirements.txt'
+  workflow_dispatch:  # Manual trigger
+
+jobs:
+  reproduce:
+    name: Test Full Setup
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.10'
+
+      - name: Install dependencies
+        run: pip install -r requirements.txt
+
+      - name: Download dataset
+        run: python scripts/download_dataset.py
+
+      - name: Download weights
+        run: python scripts/download_weights.py
+
+      - name: Download test video
+        run: python scripts/download_test_video.py
+
+      - name: Validate config
+        run: pytest tests/test_config.py -v
+
+      - name: Verify all downloads succeeded
+        run: |
+          echo "Checking downloads..."
+          python -c "
+          from pathlib import Path
+          assert Path('models/yolov8n.pt').exists() or Path('yolov8n.pt').exists(), 'Weights missing'
+          assert Path('data/test_videos/sample.mp4').exists(), 'Test video missing'
+          print('✅ All downloads verified')
+          "
