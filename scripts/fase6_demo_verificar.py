@@ -11,7 +11,11 @@ def verify_demo():
     results = {"fase": 6, "nombre": "demo", "checks": {}, "status": "PASS"}
 
     # Check for output video
-    video_patterns = ["results/*.mp4", "runs/**/*.mp4", "output*.mp4"]
+    video_patterns = [
+        "results/*.mp4", "results/*.avi",
+        "runs/**/*.mp4", "runs/**/*.avi", "runs/**/*.mov",
+        "output*.mp4", "output*.avi",
+    ]
     video_found = False
     video_path = None
 
