@@ -52,7 +52,6 @@ def run_inference(
             if candidate.exists():
                 images_dir = candidate
                 break
-            break
 
     if not images_dir:
         print("❌ Dataset images not found. Run download_dataset.py first.")
@@ -72,19 +71,26 @@ def run_inference(
     results = model.predict(
         source=[str(img) for img in sample_images],
         save=True,
-        project="runs/detect",
         name="predict",
         exist_ok=True,
     )
 
-    # Copy sample detections
-    predict_dir = Path("runs/detect/predict")
+    # Copy sample detections — find where Ultralytics actually saved them
+    predict_dir = None
+    for candidate in sorted(Path(".").rglob("predict"), key=lambda p: p.stat().st_mtime):
+        if candidate.is_dir() and list(candidate.glob("*.jpg")):
+            predict_dir = candidate
+    if predict_dir is None:
+        predict_dir = Path("runs/detect/predict")
+
     if predict_dir.exists():
         saved_imgs = sorted(predict_dir.glob("*.jpg"))[:n_samples]
         for i, img in enumerate(saved_imgs):
             dst = samples_dir / f"detection_sample_{i + 1}.jpg"
             shutil.copy(str(img), str(dst))
             print(f"  Saved: {dst}")
+    else:
+        print("⚠️  Prediction directory not found — sample images not copied.")
 
     # ── Speed benchmark ──
     print(f"Running speed benchmark ({n_speed_iterations} iterations)...")

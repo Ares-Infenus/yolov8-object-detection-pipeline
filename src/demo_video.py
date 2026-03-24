@@ -22,8 +22,12 @@ def generate_demo(
 
     video = Path(video_path)
     if not video.exists():
+        # Try to generate one on the fly
+        print(f"⚠️  Test video not found at {video_path}, attempting to generate...")
+        import subprocess
+        subprocess.run([sys.executable, "scripts/download_test_video.py"], check=False)
+    if not video.exists():
         print(f"❌ Test video not found: {video_path}")
-        print("   Run: python scripts/download_test_video.py")
         return False
 
     weights = find_best_weights()
@@ -41,18 +45,28 @@ def generate_demo(
     results = model.predict(
         source=str(video),
         save=True,
-        project="runs/detect",
         name="demo",
         exist_ok=True,
     )
 
-    # Find the output video
-    demo_dir = Path("runs/detect/demo")
-    output_videos = list(demo_dir.glob("*.mp4")) + list(demo_dir.glob("*.avi"))
-    if output_videos:
-        print(f"✅ Demo video saved to: {output_videos[0]}")
+    # Find the output video — search broadly
+    demo_dir = None
+    for candidate in sorted(Path(".").rglob("demo"), key=lambda p: p.stat().st_mtime):
+        if candidate.is_dir():
+            vids = list(candidate.glob("*.mp4")) + list(candidate.glob("*.avi")) + list(candidate.glob("*.mov"))
+            if vids:
+                demo_dir = candidate
+    if demo_dir is None:
+        demo_dir = Path("runs/detect/demo")
+
+    if demo_dir.exists():
+        output_videos = list(demo_dir.glob("*.mp4")) + list(demo_dir.glob("*.avi")) + list(demo_dir.glob("*.mov"))
+        if output_videos:
+            print(f"✅ Demo video saved to: {output_videos[0]}")
+        else:
+            print("⚠️  No video files found in demo directory.")
     else:
-        print("⚠️  Video may have been saved in a different format.")
+        print("⚠️  Demo directory not found.")
 
     return True
 
