@@ -14,7 +14,6 @@ def train(
     epochs=50,
     imgsz=640,
     batch=16,
-    project="runs/detect",
     name="train",
     exist_ok=True,
 ):
@@ -35,14 +34,19 @@ def train(
         epochs=epochs,
         imgsz=imgsz,
         batch=batch,
-        project=project,
         name=name,
         exist_ok=exist_ok,
         verbose=True,
     )
 
     # Copy training plots to docs/images/ for README
-    train_dir = Path(project) / name
+    # Find actual training directory via best.pt
+    train_dir = None
+    for best_pt in Path(".").rglob("best.pt"):
+        train_dir = best_pt.parent.parent
+        break
+    if train_dir is None:
+        train_dir = Path("runs/detect/train")
     docs_dir = Path("docs/images")
     docs_dir.mkdir(parents=True, exist_ok=True)
 

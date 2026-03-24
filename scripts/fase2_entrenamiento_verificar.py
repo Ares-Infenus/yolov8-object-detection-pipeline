@@ -10,16 +10,19 @@ from pathlib import Path
 def verify_training():
     results = {"fase": 2, "nombre": "entrenamiento", "checks": {}, "status": "PASS"}
 
-    # Look for training outputs in common locations
-    possible_dirs = [
-        Path("runs/detect/train"),
-        Path("runs/detect/train2"),
-        Path("runs/detect/train3"),
-    ]
+    # Look for training outputs — search broadly for best.pt
     train_dir = None
-    for d in possible_dirs:
+
+    # First try common explicit paths
+    for d in [Path("runs/detect/train"), Path("runs/detect/train2"), Path("runs/detect/train3")]:
         if d.exists():
             train_dir = d
+
+    # If not found, search recursively for best.pt
+    if train_dir is None:
+        for best_pt in Path(".").rglob("best.pt"):
+            train_dir = best_pt.parent.parent  # weights/best.pt -> train dir
+            break
 
     results["checks"]["train_dir_exists"] = {
         "ok": train_dir is not None,
