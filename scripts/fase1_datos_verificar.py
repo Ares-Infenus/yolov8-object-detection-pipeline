@@ -29,6 +29,14 @@ def verify_data():
             dataset_path = str(p)
             break
 
+    # Fallback: search recursively for coco128 images directory
+    if not dataset_found:
+        for p in Path(".").rglob("coco128"):
+            if (p / "images").exists():
+                dataset_found = True
+                dataset_path = str(p)
+                break
+
     results["checks"]["dataset_downloaded"] = {
         "ok": dataset_found,
         "path": dataset_path,

@@ -11,7 +11,7 @@ from pathlib import Path
 
 def find_best_weights():
     """Find the most recent best.pt from training runs."""
-    candidates = sorted(Path("runs/detect").rglob("best.pt"), key=lambda p: p.stat().st_mtime)
+    candidates = sorted(Path(".").rglob("best.pt"), key=lambda p: p.stat().st_mtime)
     if candidates:
         return str(candidates[-1])
     return None
@@ -43,6 +43,15 @@ def run_inference(
     for d in possible_dirs:
         if d.exists():
             images_dir = d
+            break
+
+    # Fallback: search recursively
+    if images_dir is None:
+        for p in Path(".").rglob("coco128"):
+            candidate = p / "images" / "train2017"
+            if candidate.exists():
+                images_dir = candidate
+                break
             break
 
     if not images_dir:

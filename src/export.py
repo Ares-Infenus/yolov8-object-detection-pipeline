@@ -9,7 +9,7 @@ from pathlib import Path
 
 def find_best_weights():
     """Find the most recent best.pt from training runs."""
-    candidates = sorted(Path("runs/detect").rglob("best.pt"), key=lambda p: p.stat().st_mtime)
+    candidates = sorted(Path(".").rglob("best.pt"), key=lambda p: p.stat().st_mtime)
     if candidates:
         return str(candidates[-1])
     return None
