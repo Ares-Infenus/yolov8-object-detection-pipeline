@@ -4,9 +4,9 @@
 
 **Real-time object detection pipeline using YOLOv8n, trained and evaluated on COCO128**
 
-[![CI — Lint & Tests](https://github.com/YOUR_USERNAME/yolov8-object-detection-pipeline/actions/workflows/ci.yml/badge.svg)](https://github.com/YOUR_USERNAME/yolov8-object-detection-pipeline/actions/workflows/ci.yml)
-[![Reproducibility](https://github.com/YOUR_USERNAME/yolov8-object-detection-pipeline/actions/workflows/validate-reproducibility.yml/badge.svg)](https://github.com/YOUR_USERNAME/yolov8-object-detection-pipeline/actions/workflows/validate-reproducibility.yml)
-[![Open In Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github/YOUR_USERNAME/yolov8-object-detection-pipeline/blob/main/notebooks/training_pipeline.ipynb)
+[![CI — Lint & Tests](https://github.com/Ares-infenus/yolov8-object-detection-pipeline/actions/workflows/ci.yml/badge.svg)](https://github.com/Ares-infenus/yolov8-object-detection-pipeline/actions/workflows/ci.yml)
+[![Reproducibility](https://github.com/Ares-infenus/yolov8-object-detection-pipeline/actions/workflows/validate-reproducibility.yml/badge.svg)](https://github.com/Ares-infenus/yolov8-object-detection-pipeline/actions/workflows/validate-reproducibility.yml)
+[![Open In Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github/Ares-infenus/yolov8-object-detection-pipeline/blob/main/notebooks/training_pipeline.ipynb)
 [![Python 3.8+](https://img.shields.io/badge/python-3.8%2B-blue.svg)](https://www.python.org/downloads/)
 [![YOLOv8](https://img.shields.io/badge/YOLO-v8-00FFFF.svg)](https://github.com/ultralytics/ultralytics)
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](LICENSE)
@@ -116,7 +116,7 @@
 
 ### Option 1: Google Colab (Recommended — Zero Setup)
 
-[![Open In Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github/YOUR_USERNAME/yolov8-object-detection-pipeline/blob/main/notebooks/training_pipeline.ipynb)
+[![Open In Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github/Ares-infenus/yolov8-object-detection-pipeline/blob/main/notebooks/training_pipeline.ipynb)
 
 Click the badge above. Everything runs in the cloud for free.
 
@@ -124,7 +124,7 @@ Click the badge above. Everything runs in the cloud for free.
 
 ```bash
 # Clone
-git clone https://github.com/YOUR_USERNAME/yolov8-object-detection-pipeline.git
+git clone https://github.com/Ares-infenus/yolov8-object-detection-pipeline.git
 cd yolov8-object-detection-pipeline
 
 # Setup (downloads dataset + weights + test video automatically)
