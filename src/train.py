@@ -3,7 +3,6 @@ Train YOLOv8n on COCO128 dataset.
 Designed for Google Colab Free (Tesla T4, 16GB VRAM).
 Saves checkpoints and training artifacts.
 """
-import sys
 import shutil
 from pathlib import Path
 

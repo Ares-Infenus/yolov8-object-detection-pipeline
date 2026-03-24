@@ -68,7 +68,7 @@ def run_inference(
 
     print(f"Running inference on {n_samples} sample images...")
     sample_images = images[:n_samples]
-    results = model.predict(
+    model.predict(
         source=[str(img) for img in sample_images],
         save=True,
         name="predict",
@@ -94,7 +94,6 @@ def run_inference(
 
     # ── Speed benchmark ──
     print(f"Running speed benchmark ({n_speed_iterations} iterations)...")
-    import numpy as np
 
     # Warm up
     dummy = np.random.randint(0, 255, (640, 640, 3), dtype=np.uint8)

@@ -3,7 +3,6 @@ Download COCO128 dataset using Ultralytics built-in downloader.
 COCO128 is a mini version of COCO with 128 images and 80 classes (~7MB).
 """
 import sys
-from pathlib import Path
 
 
 def download_coco128():

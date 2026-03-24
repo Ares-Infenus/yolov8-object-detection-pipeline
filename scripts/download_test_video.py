@@ -36,8 +36,6 @@ def download_video():
     print("Generating test video from dataset images...")
     try:
         import cv2
-        import numpy as np
-
         # Find dataset images
         images_dir = None
         for p in [Path("datasets/coco128/images/train2017"),

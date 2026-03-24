@@ -15,7 +15,7 @@ def download_weights():
         from ultralytics import YOLO
         import shutil
         # This automatically downloads yolov8n.pt if not present
-        model = YOLO('yolov8n.pt')
+        YOLO('yolov8n.pt')
         # Move to models/ directory
         src = Path('yolov8n.pt')
         dst = models_dir / 'yolov8n.pt'

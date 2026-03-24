@@ -1,7 +1,6 @@
 """
 Test that configuration files are valid.
 """
-import pytest
 import yaml
 from pathlib import Path
 

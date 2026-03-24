@@ -37,12 +37,12 @@ def generate_demo(
 
     Path(output_dir).mkdir(parents=True, exist_ok=True)
 
-    print(f"Generating demo video...")
+    print("Generating demo video...")
     print(f"  Model: {weights}")
     print(f"  Input: {video_path}")
 
     model = YOLO(weights)
-    results = model.predict(
+    model.predict(
         source=str(video),
         save=True,
         name="demo",

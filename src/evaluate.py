@@ -32,8 +32,6 @@ def evaluate(
     base_model="models/yolov8n.pt",
     data="coco128.yaml",
 ):
-    from ultralytics import YOLO
-
     metrics_dir = Path("results/metrics")
     metrics_dir.mkdir(parents=True, exist_ok=True)
 
