@@ -1,0 +1,10 @@
+{
+  "fps_avg": 126.49,
+  "latency_avg_ms": 7.91,
+  "latency_std_ms": 1.14,
+  "latency_min_ms": 6.88,
+  "latency_max_ms": 12.1,
+  "n_iterations": 100,
+  "image_size": 640,
+  "model": "runs/detect/train/weights/best.pt"
+}
